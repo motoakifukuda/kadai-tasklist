@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Tasks;    // 追加
 
+use Illuminate\Support\Facades\Auth;
+
 class TasksController extends Controller
 {
     /**
@@ -54,6 +56,7 @@ class TasksController extends Controller
         $task = new Tasks;
         $task->status = $request->status;
         $task->content = $request->content;
+        $task->user_id =  $user = Auth::id();
         $task->save();
         
         return redirect('/tasks');
